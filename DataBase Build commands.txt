@@ -1,0 +1,309 @@
+CREATE TABLE `Job` (
+  `Cust_Job_ID` Varchar(15),
+  `Cust_ID` VarChar(15),
+  `Job_ID` VarChar(15),
+  `Contract_ID` VarCHar(15),
+  PRIMARY KEY (`Cust_Job_ID`),
+  KEY `FK` (`Cust_ID`, `Job_ID`, `Contract_ID`)
+);
+
+
+CREATE TABLE `Contract Info` (
+  `Contract_ID` Varchar(15),
+  `Contract_Price` Decimal(7,2),
+  `Contract_opt1` Decimal(7,2),
+  `Contract_opt2` Decimal(7,2),
+  `Contract_opt` Decimal(7,2),
+  `Contract_Extra` VarChar(15),
+  `Bid_Job_Status` VarChar(15),
+  PRIMARY KEY (`Contract_ID`)
+);
+
+
+CREATE TABLE `Cust_Info` (
+  `Cust_ID` VarChar(15),
+  `F_Name` VarChar(30),
+  `L_Name` VarChar(30),
+  `P_Phone` Char(10),
+  `SF_Name` VarChar(30),
+  `SL_Name` VarChar(30),
+  `S_Phone` Char(10),
+  `P_Email` VarChar(30),
+  `S_Email` VarChar(30),
+  `Street_Ad` VarChar(30),
+  PRIMARY KEY (`Cust_ID`),
+  KEY `FK` (`Street_Ad`)
+);
+
+CREATE TABLE `Address` (
+  `Street_Ad` varchar(30),
+  `City` Varchar(15),
+  `State` Varchar(15),
+  `Zip` Char(10),
+  PRIMARY KEY (`Street_Ad`)
+);
+
+CREATE TABLE `Job_Info` (
+  `Job_ID` VarChar(15),
+  `Job_Street` VarChar(30),
+  `INs_opt` VarChar(15),
+  `Call_Before` VarChar(15),
+  `Pref_Time` VarChar(15),
+  `Comments` VarChar(300),
+  `Em_Rep` VarChar(15),
+  `Ins_Claim` VarChar(15),
+  `Tear_Rep` VarChar(15),
+  `Insp_StorDam` VarChar(15),
+  `Bid_Date` Date,
+  `Start_Date` Date,
+  `Comp_Date` Date,
+  `Gutters_ID` VarChar(15),
+  `Stories` VarChar(15),
+  `Steep` VarChar(15),
+  `Sty_Acc` VarChar(15),
+  `Acc_How` VarChar(15),
+  `Parts_ID` VarChar(15),
+  PRIMARY KEY (`Job_ID`),
+  KEY `FK` (`Gutters_ID`, `Parts_ID`)
+);
+
+CREATE TABLE `Contractor_Info` (
+  `Gutters_ID` VarChar(15),
+  `CParts_ID` VarChar(15),
+  `C_Tearoff` VarChar(15),
+  `C_Walkable` VarChar(15),
+  `C_Ins_Opt` VarChar(15),
+  `CSpecial_Instruct` VarChar(300),
+  PRIMARY KEY (`Gutters_ID`),
+  KEY `FK` (`CParts_ID`)
+);
+
+CREATE TABLE `Contractor_parts_List` (
+  `CParts_ID` VarChar(15),
+  `C_Part_Num` VarChar(15),
+  `Quantity` int,
+  PRIMARY KEY (`CParts_ID`, `C_Part_Num`)
+);
+
+CREATE TABLE `Contractor_Parts` (
+  `CPart_Num` VarChar(15),
+  `CPart_Desc` VarChar(300),
+  `CPart_Price` Decimal(6,2),
+  `CPart_Cost` Decimal(6,2),
+  PRIMARY KEY (`CPart_Num`)
+);
+
+
+CREATE TABLE `Parts_List` (
+  `Parts_ID` VarChar(15),
+  `Part_Num` VarChar(15),
+  `Quantity` int,
+  PRIMARY KEY (`Parts_ID`, `Part_Num`)
+);
+
+CREATE TABLE `Parts` (
+  `Part_Num` Int(15),
+  `Part_Desc` VarChar(300),
+  `Part_Price` Deciamal(6,2),
+  `Part_Cost` Decimal(6,2),
+  PRIMARY KEY (`Part_Num`)
+);
+
+
+===============================================================================================
+
+
+
+
+BEGIN; 
+
+	INSERT INTO address(Street_Ad, City, State, Zip)
+    VALUES
+    ('1 Main Street','St. Louis', 'Missouri','63131');
+    
+    INSERT INTO cust_info(Cust_ID,F_Name,L_Name,P_Email,P_Phone,SF_Name,SL_Name,Steed_Ad,S_Email,S_Phone)
+    VALUES
+    ('15','JOe','Smoe','a@aa.com','3145543411','SLoe','Smoe','1 Main Street','abb@ab.com','3214569875');
+    
+    COMMIT; 
+=================================================================================================
+Drop Table parts;
+
+CREATE TABLE `Parts` (
+  `Part_Num` Int(15),
+  `Part_Desc` VarChar(300),
+  `Part_Price` Decimal(6,2),
+  `Part_Cost` Decimal(6,2),
+  PRIMARY KEY (`Part_Num`));
+
+ALTER TABLE `parts` CHANGE `Part_Num` `Part_Num` INT(15) NOT NULL AUTO_INCREMENT; 
+
+
+
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Tanko Heritage 30',71,94.43);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Tanko Heritage 50',104.71,139.26);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Tanko Elites',61,81.13);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Tanko 15 lb felt underlayment',25.64,34.10);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Tanko 30 lb felt underlayment',50,66.5);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Tanko Hip and Ridge',11.18,14.87);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Rapid Ridge Vent',51.22,68.12);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Carlisle ice and Water Shield',47,62.51);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('2" Lead Flasing 22 Degrees',32.80,43.62);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('3" Lead Flasing 22 Degrees',29.02,38.60);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('4" Lead Flasing 22 Degrees',36.29,48.27);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Broan XL vent',42.37,56.35);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Lomanco 550 Static Vent',11.42,15.19);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('6" furnace cap',19.58,26.04);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('5" furnace cap',16.74,22.26);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('6" Rain Collar',5.03,6.69);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('6" Roof Flang',18.84,25.06);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('5" Rain Collar',4.65,6.18);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('5" Roof Flang',13.13,17.46);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Tamko Awaplan',75.64,100.60);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Fiberglass Base Sheet',38.04,50.59);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('5 Gallon Modifliud Bitemen Adhsive',46.13,61.35);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Stup Flashing ',0.25,.33);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('2.5" Roof Nails',48.34,64.29);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Certain teed XT30',63,83.79);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Certain tub Landmark',74,98.42);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('flintastic rolled roof',90.91,120.91);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Flintastic plubase',104.17,138.55);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Fluksal Caulk',5.20,6.92);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Trim Coil',67.07,89.20);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('5 Gal Bucket Plasic Cement',33.67,44.78);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('dripudge',3.49,4.64);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('toke slow',2.74,3.64);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Vielux Sole Skylight',428.64,570.09);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Vielux Flashing Kit',103.40,137.52);
+Insert into Parts(Part_Desc,Part_Cost,Part_Price)
+values
+('Soil Stack Flashing',5.72,7.61);
+
+============================================================================================
+
+ALTER TABLE `contractor_parts` CHANGE `CPart_Num` `CPart_Num` INT(15) NOT NULL AUTO_INCREMENT; 
+
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('6" gutter',4.55,6.05);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('5" gutter',3.25,4.32);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('3x4 Down Spout',3.55,4.72);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('2x3 Down Spout',3.25,4.32);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('tear off',.3,.3);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('miters',12.50,16.63);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('bay mitrus',15.00,20.00);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('1 Story Ladder Work',.3,.3);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('2 Story Ladder Work',.6,.6);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('Custom Flashing',2,2.66);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('Drain Tile Adapters',7,7);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('6" EZ Lock Screens',2.40,3.2);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('Custom Bent Fascia',5.00,6.65);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('Rhino Gaurd Covers 5"',8.00,10.64);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('Rhino Gaurd Covers 6"',9.00,11.97);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('Remove Re-install Existing Screens',.75,.75);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('Clean Gutters',1,1);
+Insert into contractor_parts(CPart_Desc,CPart_Cost,CPart_Price)
+values
+('Siding and Sable Vents',100,133);
